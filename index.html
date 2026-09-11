@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Cutoo ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#21000d,#7b1745,#ef6797);font-family:Arial,sans-serif;color:#fff;text-align:center}
+.card{width:100%;max-width:570px;padding:40px 20px;border-radius:32px;background:rgba(255,255,255,.14);box-shadow:0 20px 70px rgba(0,0,0,.4)}
+.heart{font-size:70px}.small{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#ffd9e6}
+h1{font-family:Georgia,serif;font-size:clamp(38px,10vw,58px);margin:18px 0}
+p{font-size:17px;line-height:1.65}
+.clock{font-size:28px;font-weight:bold;margin:18px 0 4px}
+.date{font-size:13px;color:#ffdce8;margin-bottom:25px}
+.timer{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:20px 0}
+.unit{padding:14px 4px;border-radius:16px;background:rgba(0,0,0,.24)}
+.number{display:block;font-size:29px;font-weight:bold}
+.label{display:block;margin-top:5px;font-size:10px;color:#ffdce8;text-transform:uppercase}
+.note{color:#ffe6ef}
+#surprise{display:none}
+</style>
+</head>
+<body>
+<div class="card">
+
+<div id="locked">
+  <div class="heart">💌</div>
+  <div class="small">A little surprise from Kartikay</div>
+  <h1>Hey Cutoo ❤️</h1>
+  <p>Your birthday surprise is waiting for you...</p>
+
+  <div class="clock" id="currentTime">Loading...</div>
+  <div class="date" id="currentDate">Loading current time...</div>
+
+  <p class="note">Countdown to <b>13 September 2026, 12:00 AM</b><br>India time 🇮🇳</p>
+
+  <div class="timer">
+    <div class="unit"><span id="days" class="number">00</span><span class="label">Days</span></div>
+    <div class="unit"><span id="hours" class="number">00</span><span class="label">Hours</span></div>
+    <div class="unit"><span id="minutes" class="number">00</span><span class="label">Minutes</span></div>
+    <div class="unit"><span id="seconds" class="number">00</span><span class="label">Seconds</span></div>
+  </div>
+
+  <p>⏳ Every second is taking you closer to your surprise... ❤️</p>
+</div>
+
+<div id="surprise">
+  <div class="heart">🎂❤️</div>
+  <h1>Happy Birthday Cutoo! 🥰</h1>
+  <p>My favourite person, my happiness and my safe place. ❤️</p>
+  <p>I don't know if words can ever completely explain what you mean to me.</p>
+  <p>You have become such a beautiful part of my life that I can't imagine my days without you.</p>
+  <p>I love your smile, your little ways, your craziness, your softness — everything that makes you <b>you</b>. 💕</p>
+  <p>I hope I get to celebrate not just this birthday, but all your birthdays with you. 🥹❤️</p>
+  <h2>I choose you. ❤️</h2>
+  <p>Today. Tomorrow. And all the little moments in between.</p>
+  <p>With all my love,<br><b>Kartikay ❤️</b></p>
+</div>
+
+</div>
+
+<script>
+(function () {
+  // Fixed target: 13 September 2026, 00:00:00 India Standard Time (UTC+5:30)
+  var target = Date.parse("2026-09-12T18:30:00Z");
+
+  function pad(n) {
+    return String(n).padStart(2, "0");
+  }
+
+  function update() {
+    var now = new Date();
+    var remaining = target - now.getTime();
+
+    document.getElementById("currentTime").textContent =
+      now.toLocaleTimeString("en-IN", {
+        timeZone: "Asia/Kolkata",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true
+      });
+
+    document.getElementById("currentDate").textContent =
+      now.toLocaleDateString("en-IN", {
+        timeZone: "Asia/Kolkata",
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      }) + " • India time";
+
+    if (remaining <= 0) {
+      document.getElementById("locked").style.display = "none";
+      document.getElementById("surprise").style.display = "block";
+      return;
+    }
+
+    var totalSeconds = Math.floor(remaining / 1000);
+    var days = Math.floor(totalSeconds / 86400);
+    var hours = Math.floor((totalSeconds % 86400) / 3600);
+    var minutes = Math.floor((totalSeconds % 3600) / 60);
+    var seconds = totalSeconds % 60;
+
+    document.getElementById("days").textContent = pad(days);
+    document.getElementById("hours").textContent = pad(hours);
+    document.getElementById("minutes").textContent = pad(minutes);
+    document.getElementById("seconds").textContent = pad(seconds);
+  }
+
+  update();
+  setInterval(update, 1000);
+})();
+</script>
+</body>
+</html>
