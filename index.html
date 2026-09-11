@@ -4,114 +4,728 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Cutoo ❤️</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#21000d,#7b1745,#ef6797);font-family:Arial,sans-serif;color:#fff;text-align:center}
-.card{width:100%;max-width:570px;padding:40px 20px;border-radius:32px;background:rgba(255,255,255,.14);box-shadow:0 20px 70px rgba(0,0,0,.4)}
-.heart{font-size:70px}.small{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#ffd9e6}
-h1{font-family:Georgia,serif;font-size:clamp(38px,10vw,58px);margin:18px 0}
-p{font-size:17px;line-height:1.65}
-.clock{font-size:28px;font-weight:bold;margin:18px 0 4px}
-.date{font-size:13px;color:#ffdce8;margin-bottom:25px}
-.timer{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:20px 0}
-.unit{padding:14px 4px;border-radius:16px;background:rgba(0,0,0,.24)}
-.number{display:block;font-size:29px;font-weight:bold}
-.label{display:block;margin-top:5px;font-size:10px;color:#ffdce8;text-transform:uppercase}
-.note{color:#ffe6ef}
-#surprise{display:none}
+
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:linear-gradient(135deg,#21000d,#7b1745,#ef6797);
+  font-family:Arial,sans-serif;
+  color:#fff;
+  text-align:center;
+  overflow-x:hidden;
+}
+
+.card{
+  width:100%;
+  max-width:570px;
+  padding:40px 20px;
+  border-radius:32px;
+  background:rgba(255,255,255,.14);
+  box-shadow:0 20px 70px rgba(0,0,0,.4);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.2);
+  position:relative;
+  z-index:2;
+}
+
+.heart{
+  font-size:70px;
+  animation:heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat{
+  50%{transform:scale(1.12)}
+}
+
+.small{
+  font-size:12px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:#ffd9e6;
+}
+
+h1{
+  font-family:Georgia,serif;
+  font-size:clamp(38px,10vw,58px);
+  margin:18px 0;
+}
+
+p{
+  font-size:17px;
+  line-height:1.65;
+}
+
+.clock{
+  font-size:28px;
+  font-weight:bold;
+  margin:18px 0 4px;
+}
+
+.date{
+  font-size:13px;
+  color:#ffdce8;
+  margin-bottom:25px;
+}
+
+.timer{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+  margin:20px 0;
+}
+
+.unit{
+  padding:14px 4px;
+  border-radius:16px;
+  background:rgba(0,0,0,.24);
+}
+
+.number{
+  display:block;
+  font-size:29px;
+  font-weight:bold;
+}
+
+.label{
+  display:block;
+  margin-top:5px;
+  font-size:10px;
+  color:#ffdce8;
+  text-transform:uppercase;
+}
+
+.note{
+  color:#ffe6ef;
+}
+
+#surprise{
+  display:none;
+}
+
+.secret-btn{
+  border:0;
+  border-radius:999px;
+  padding:14px 22px;
+  background:#fff;
+  color:#9b2458;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 8px 25px rgba(0,0,0,.25);
+  margin-top:15px;
+}
+
+.pulse{
+  animation:pulse 1.8s infinite;
+}
+
+@keyframes pulse{
+  50%{transform:scale(1.06)}
+}
+
+.secret{
+  display:none;
+  margin-top:22px;
+  padding:20px;
+  border-radius:20px;
+  background:rgba(255,255,255,.13);
+  animation:fadeIn .8s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(15px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.surprise-card{
+  margin-top:20px;
+  padding:16px;
+  border-radius:20px;
+  background:rgba(255,255,255,.1);
+}
+
+.wish-btn{
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.12);
+  color:#fff;
+  border-radius:999px;
+  padding:10px 14px;
+  margin:5px;
+  cursor:pointer;
+}
+
+.love-meter{
+  margin:20px auto;
+  max-width:420px;
+}
+
+.meter-title{
+  font-size:13px;
+  color:#ffe0eb;
+  margin-bottom:7px;
+}
+
+.meter{
+  height:12px;
+  border-radius:20px;
+  background:rgba(0,0,0,.25);
+  overflow:hidden;
+}
+
+.meter-fill{
+  height:100%;
+  width:0;
+  border-radius:20px;
+  background:#fff;
+  animation:fillLove 3s ease forwards;
+}
+
+@keyframes fillLove{
+  to{width:100%}
+}
+
+.tiny-note{
+  font-size:12px!important;
+  opacity:.8;
+  margin-top:8px;
+}
+
+.sparkles,.hearts{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:0;
+}
+
+.spark{
+  position:absolute;
+  width:4px;
+  height:4px;
+  background:white;
+  border-radius:50%;
+  animation:twinkle 2.5s infinite;
+}
+
+@keyframes twinkle{
+  0%,100%{opacity:.15;transform:scale(.7)}
+  50%{opacity:1;transform:scale(1.5)}
+}
+
+.float-heart{
+  position:absolute;
+  font-size:22px;
+  animation:floatUp 7s linear infinite;
+  opacity:.7;
+}
+
+@keyframes floatUp{
+  0%{
+    transform:translateY(110vh);
+    opacity:0;
+  }
+  15%{opacity:.7}
+  100%{
+    transform:translateY(-15vh) rotate(25deg);
+    opacity:0;
+  }
+}
+
+.choiceText{
+  font-weight:bold;
+  min-height:28px;
+}
 </style>
 </head>
+
 <body>
+
+<div class="sparkles" id="sparkles"></div>
+<div class="hearts" id="hearts"></div>
+
 <div class="card">
 
+<!-- LOCKED SCREEN -->
+
 <div id="locked">
-  <div class="heart">💌</div>
-  <div class="small">A little surprise from Kartikay</div>
-  <h1>Hey Cutoo ❤️</h1>
-  <p>Your birthday surprise is waiting for you...</p>
 
-  <div class="clock" id="currentTime">Loading...</div>
-  <div class="date" id="currentDate">Loading current time...</div>
+<div class="heart">💌</div>
 
-  <p class="note">Countdown to <b>13 September 2026, 12:00 AM</b><br>India time 🇮🇳</p>
-
-  <div class="timer">
-    <div class="unit"><span id="days" class="number">00</span><span class="label">Days</span></div>
-    <div class="unit"><span id="hours" class="number">00</span><span class="label">Hours</span></div>
-    <div class="unit"><span id="minutes" class="number">00</span><span class="label">Minutes</span></div>
-    <div class="unit"><span id="seconds" class="number">00</span><span class="label">Seconds</span></div>
-  </div>
-
-  <p>⏳ Every second is taking you closer to your surprise... ❤️</p>
+<div class="small">
+A little surprise from Kartikay
 </div>
+
+<h1>Hey Cutoo ❤️</h1>
+
+<p>
+Your birthday surprise is waiting for you...
+</p>
+
+<div class="clock" id="currentTime">
+Loading...
+</div>
+
+<div class="date" id="currentDate">
+Loading current time...
+</div>
+
+<p class="note">
+Countdown to <b>13 September 2026, 12:00 AM</b><br>
+India time 🇮🇳
+</p>
+
+<div class="timer">
+
+<div class="unit">
+<span id="days" class="number">00</span>
+<span class="label">Days</span>
+</div>
+
+<div class="unit">
+<span id="hours" class="number">00</span>
+<span class="label">Hours</span>
+</div>
+
+<div class="unit">
+<span id="minutes" class="number">00</span>
+<span class="label">Minutes</span>
+</div>
+
+<div class="unit">
+<span id="seconds" class="number">00</span>
+<span class="label">Seconds</span>
+</div>
+
+</div>
+
+<p>
+⏳ Every second is taking you closer to your surprise... ❤️
+</p>
+
+</div>
+
+
+<!-- BIRTHDAY SURPRISE -->
 
 <div id="surprise">
-  <div class="heart">🎂❤️</div>
-  <h1>Happy Birthday Cutoo! 🥰</h1>
-  <p>My favourite person, my happiness and my safe place. ❤️</p>
-  <p>I don't know if words can ever completely explain what you mean to me.</p>
-  <p>You have become such a beautiful part of my life that I can't imagine my days without you.</p>
-  <p>I love your smile, your little ways, your craziness, your softness — everything that makes you <b>you</b>. 💕</p>
-  <p>I hope I get to celebrate not just this birthday, but all your birthdays with you. 🥹❤️</p>
-  <h2>I choose you. ❤️</h2>
-  <p>Today. Tomorrow. And all the little moments in between.</p>
-  <p>With all my love,<br><b>Kartikay ❤️</b></p>
+
+<div class="heart">
+🎂❤️
+</div>
+
+<h1>
+Happy Birthday Cutoo! 🥰
+</h1>
+
+<p>
+My favourite person, my happiness and my safe place. ❤️
+</p>
+
+<!-- LOVE METER -->
+
+<div class="love-meter">
+
+<div class="meter-title">
+Kartikay's love for Cutoo ❤️
+</div>
+
+<div class="meter">
+<div class="meter-fill"></div>
+</div>
+
+<div class="tiny-note">
+Result: 100%... actually, this meter is too small. 🥹
 </div>
 
 </div>
+
+<p>
+I don't know if words can ever completely explain what you mean to me.
+</p>
+
+<p>
+You have become such a beautiful part of my life that I can't imagine my days without you.
+</p>
+
+<p>
+I love your smile, your little ways, your craziness, your softness —
+everything that makes you <b>you</b>. 💕
+</p>
+
+<p>
+I hope I get to celebrate not just this birthday,
+but all your birthdays with you. 🥹❤️
+</p>
+
+<h2>
+I choose you. ❤️
+</h2>
+
+<p>
+Today. Tomorrow. And all the little moments in between.
+</p>
+
+<p>
+With all my love,<br>
+<b>Kartikay ❤️</b>
+</p>
+
+
+<!-- PICK A WISH -->
+
+<div class="surprise-card">
+
+<div id="wishText">
+Pick one... I made all three for you ❤️
+</div>
+
+<br>
+
+<button class="wish-btn" onclick="wish(0)">
+🥰 A sweet one
+</button>
+
+<button class="wish-btn" onclick="wish(1)">
+😂 A cute one
+</button>
+
+<button class="wish-btn" onclick="wish(2)">
+❤️ The real one
+</button>
+
+</div>
+
+
+<!-- SECRET -->
+
+<button class="secret-btn pulse" onclick="openSecret()">
+💌 One More Little Surprise
+</button>
+
+<div class="secret" id="secret">
+
+<div style="font-size:40px">
+🥹❤️
+</div>
+
+<p>
+<b>Cutoo, if I could pause time...</b>
+</p>
+
+<p>
+I would keep the little moments with you forever —
+the laughs, the silly conversations, the hugs,
+and even the random things that only we understand.
+</p>
+
+<p>
+Thank you for being <b>you</b>.
+Here's to us, to every crazy little memory we've made,
+and to all the ones still waiting for us.
+</p>
+
+<p>
+<b>Happy Birthday, my Cutoo. ❤️</b>
+</p>
+
+</div>
+
+</div>
+
+</div>
+
 
 <script>
-(function () {
-  // Fixed target: 13 September 2026, 00:00:00 India Standard Time (UTC+5:30)
-  var target = Date.parse("2026-09-12T18:30:00Z");
 
-  function pad(n) {
-    return String(n).padStart(2, "0");
-  }
+/* TARGET: 13 SEPTEMBER 2026, 12:00 AM IST */
 
-  function update() {
-    var now = new Date();
-    var remaining = target - now.getTime();
+var target =
+Date.parse("2026-09-12T18:30:00Z");
 
-    document.getElementById("currentTime").textContent =
-      now.toLocaleTimeString("en-IN", {
-        timeZone: "Asia/Kolkata",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true
-      });
 
-    document.getElementById("currentDate").textContent =
-      now.toLocaleDateString("en-IN", {
-        timeZone: "Asia/Kolkata",
-        weekday: "long",
-        day: "numeric",
-        month: "long",
-        year: "numeric"
-      }) + " • India time";
+/* PAD NUMBERS */
 
-    if (remaining <= 0) {
-      document.getElementById("locked").style.display = "none";
-      document.getElementById("surprise").style.display = "block";
-      return;
-    }
+function pad(n){
+return String(n).padStart(2,"0");
+}
 
-    var totalSeconds = Math.floor(remaining / 1000);
-    var days = Math.floor(totalSeconds / 86400);
-    var hours = Math.floor((totalSeconds % 86400) / 3600);
-    var minutes = Math.floor((totalSeconds % 3600) / 60);
-    var seconds = totalSeconds % 60;
 
-    document.getElementById("days").textContent = pad(days);
-    document.getElementById("hours").textContent = pad(hours);
-    document.getElementById("minutes").textContent = pad(minutes);
-    document.getElementById("seconds").textContent = pad(seconds);
-  }
+/* CURRENT INDIA TIME + COUNTDOWN */
 
-  update();
-  setInterval(update, 1000);
-})();
+function update(){
+
+var now = new Date();
+
+var remaining =
+target - now.getTime();
+
+
+document.getElementById("currentTime")
+.textContent =
+now.toLocaleTimeString("en-IN",{
+
+timeZone:"Asia/Kolkata",
+
+hour:"2-digit",
+minute:"2-digit",
+second:"2-digit",
+
+hour12:true
+
+});
+
+
+document.getElementById("currentDate")
+.textContent =
+now.toLocaleDateString("en-IN",{
+
+timeZone:"Asia/Kolkata",
+
+weekday:"long",
+day:"numeric",
+month:"long",
+year:"numeric"
+
+}) + " • India time";
+
+
+/* BIRTHDAY HAS ARRIVED */
+
+if(remaining <= 0){
+
+document.getElementById("locked")
+.style.display="none";
+
+document.getElementById("surprise")
+.style.display="block";
+
+miniConfetti();
+
+return;
+
+}
+
+
+/* COUNTDOWN */
+
+var totalSeconds =
+Math.floor(remaining/1000);
+
+var days =
+Math.floor(totalSeconds/86400);
+
+var hours =
+Math.floor((totalSeconds%86400)/3600);
+
+var minutes =
+Math.floor((totalSeconds%3600)/60);
+
+var seconds =
+totalSeconds%60;
+
+
+document.getElementById("days")
+.textContent=pad(days);
+
+document.getElementById("hours")
+.textContent=pad(hours);
+
+document.getElementById("minutes")
+.textContent=pad(minutes);
+
+document.getElementById("seconds")
+.textContent=pad(seconds);
+
+}
+
+
+update();
+
+setInterval(update,1000);
+
+
+/* STARS */
+
+var sparkleBox =
+document.getElementById("sparkles");
+
+for(var i=0;i<45;i++){
+
+var s=document.createElement("span");
+
+s.className="spark";
+
+s.style.left=
+Math.random()*100+"%";
+
+s.style.top=
+Math.random()*100+"%";
+
+s.style.animationDelay=
+Math.random()*3+"s";
+
+sparkleBox.appendChild(s);
+
+}
+
+
+/* FLOATING HEARTS */
+
+var heartBox =
+document.getElementById("hearts");
+
+for(var j=0;j<14;j++){
+
+var h=document.createElement("span");
+
+h.className="float-heart";
+
+h.textContent=
+j%2 ? "❤️" : "💕";
+
+h.style.left=
+Math.random()*100+"%";
+
+h.style.animationDelay=
+Math.random()*7+"s";
+
+h.style.animationDuration=
+(6+Math.random()*5)+"s";
+
+heartBox.appendChild(h);
+
+}
+
+
+/* WISHES */
+
+var wishes=[
+
+"I hope your smile stays this beautiful forever. 🥰",
+
+"Official birthday rule: Cutoo gets extra hugs today. 😂❤️",
+
+"My favourite wish is simple: I want many, many more birthdays with you. ❤️"
+
+];
+
+
+function wish(i){
+
+var el =
+document.getElementById("wishText");
+
+el.textContent =
+wishes[i];
+
+miniConfetti();
+
+}
+
+
+/* SECRET BUTTON */
+
+function openSecret(){
+
+var box =
+document.getElementById("secret");
+
+if(box.style.display==="block"){
+
+box.style.display="none";
+
+}else{
+
+box.style.display="block";
+
+miniConfetti();
+
+}
+
+}
+
+
+/* HEART CONFETTI */
+
+function miniConfetti(){
+
+for(var k=0;k<35;k++){
+
+var c=document.createElement("span");
+
+c.textContent =
+k%2 ? "❤️" : "✨";
+
+c.style.position="fixed";
+
+c.style.left="50%";
+c.style.top="52%";
+
+c.style.zIndex="10";
+
+c.style.fontSize =
+(12+Math.random()*16)+"px";
+
+c.style.pointerEvents="none";
+
+document.body.appendChild(c);
+
+
+var x =
+(Math.random()-.5)*380;
+
+var y =
+(Math.random()-.5)*320;
+
+
+var animation =
+c.animate(
+
+[
+
+{
+transform:
+"translate(-50%,-50%) scale(.5)",
+opacity:1
+},
+
+{
+transform:
+"translate(calc(-50% + "+x+"px),calc(-50% + "+y+"px)) scale(1.3)",
+opacity:0
+}
+
+],
+
+{
+duration:
+900+Math.random()*500,
+
+easing:"ease-out"
+
+}
+
+);
+
+
+animation.onfinish=function(){
+
+this.effect.target.remove();
+
+};
+
+}
+
+}
+
 </script>
+
 </body>
 </html>
